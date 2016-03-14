@@ -1,4 +1,5 @@
 import scrapy
+import re
 from joke.items import JokeItem
 class JokeSpider(scrapy.Spider):
     name = "joke"
@@ -24,7 +25,10 @@ class JokeSpider(scrapy.Spider):
                     new_joke = JokeItem()
                     if content.xpath( './/div[@id="endtext"]' ).extract()[i]:
                         new_joke['title'] = content.xpath( './/h3/a/text()' ).extract()[i].encode('utf8')
-                        new_joke['content'] = content.xpath( './/div[@id="endtext"]' ).extract()[i].encode('utf8')
+
+                        raw_content = content.xpath( './/div[@id="endtext"]' ).extract()[i].encode('utf8')
+                        new_content = re.sub('\<.*?\>','', raw_content).replace("\r","").replace("\n","")
+                        new_joke['content'] = new_content
                         print new_joke['title']
                         print new_joke['content']
                         yield new_joke

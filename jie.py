@@ -3,9 +3,6 @@ import jieba
 import json
 from pymongo import MongoClient
 
-CONTENT = open('buzui.txt', 'rb').read()
-
-print "Input：", CONTENT
 
 client = MongoClient()
 db = client.joke
@@ -16,7 +13,7 @@ with open('joke.dat') as jokes:
         js = json.loads(joke)
         print js['title']
         title = js['title']
-        words = jieba.cut(js['CONTENT'], cut_all=False)
+        words = jieba.cut(js['content'], cut_all=False)
         for word in words:
             cursor = db.words.find({"word":word})
             if cursor.count() > 0:
