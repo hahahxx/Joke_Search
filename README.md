@@ -1,3 +1,3 @@
 # Joke_Search
-/joke Joke Crawler using scrapy framework
-/joke_frontend Joke searching web app using Meteor + MongoDB 
+Folder /joke Joke Crawler using scrapy framework <br />
+Folder /joke_frontend Joke searching web app using Meteor + MongoDB 
